@@ -2,7 +2,7 @@ function rho = matterDensity(x, y)
 % Location of the perturber
 x0 = 0;
 y0 = 0;
-rho = 6*exp(-((x - 2*x0).^2 + (y + y0/2).^2)*500);
+rho = 7*exp(-((x - 2*x0).^2 + (y + y0/2).^2)*500);
   
   
 % p = 0.1;
