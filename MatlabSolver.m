@@ -52,3 +52,29 @@ dPhidy = reshape(dPhidy, size(Y));
 dx_htt = -2*dPhidx;
 dy_htt = -2*dPhidy;
 
+%% Calculate geodesics 
+departureAngles = [262, 285];
+Geodesics = geodesics(X, Y, dx_htt, dy_htt, departureAngles);
+
+%% Plot
+plotGeodesics(Geodesics, departureAngles)
+
+% Plot on gravitational potential plot (figure 2)
+figure(2)
+hold on
+geodcolor = [10, 28, 55; ...    blue
+             80, 14, 42; ...    red
+             17, 71, 03; ...    green
+             85, 33, 10]/100; % orange
+for k = 1:numel(Geodesics)
+    xmu23OnPotential = interpolateSolution(Phi, Geodesics{k}(:, 2), Geodesics{k}(:, 3));
+    plot3(Geodesics{k}(:, 2), Geodesics{k}(:, 3), xmu23OnPotential, 'Color', geodcolor(k,:))
+    xlabel("$x^1$", 'interpreter', 'latex')
+    ylabel("$x^2$", 'interpreter', 'latex')
+    zlabel("$\Phi$", 'interpreter', 'latex')
+    title("Photon Geodesics on the Gravitational Potential", 'interpreter', 'latex')
+    colormap pink
+    view(-135, 37)
+
+    pause(0.001)
+end

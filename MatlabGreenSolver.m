@@ -21,18 +21,18 @@ M = integral2(@matterDensity, ...
 N = 50;
 
 % Define the coordinates at which the solution is to be evaluated
-R = linspace(0,1,N);
-T = linspace(0,2*pi,N);
+rvec = linspace(0,1,N);
+tvec = linspace(0,2*pi,N);
 
 % Allocate memory for the solution
 PhiMatlabG = nan(N);
 
 % Begin evaluating the solution via Green's function
 i = 1;
-for r = R
+for r = rvec
     % Set the t coordinate index
     j = 1;
-    for t = T
+    for t = tvec
         
         % Define integrands
         G4pirho = @(rp, tp) poissonGDisk(r, t, rp, tp).*4.*pi.*matterDensity(rp.*cos(tp), rp.*sin(tp)).*rp;
@@ -61,8 +61,8 @@ for r = R
 end
 
 % Plot solution obtained from Green's function
-[T, R] = meshgrid(T, R);
-mesh(R.*cos(T), R.*sin(T), PhiMatlabG);
+[T, R] = meshgrid(tvec, rvec);
+mesh(R.*cos(T), R.*sin(T), PhiMatlabG, 'EdgeColor', 'interp');
 colormap copper
 title("Gravitational Potential from Green's Function", 'interpreter', 'latex')
 xlabel("$x$", 'interpreter', 'latex')
@@ -70,3 +70,11 @@ ylabel("$y$", 'interpreter', 'latex')
 zlabel("Gravitational Potential $\Phi$", 'interpreter', 'latex')
 h = colorbar;
 title(h, "$\Phi$", 'interpreter', 'latex')
+
+%% Calculate geodesics
+departureAngles = [262, 285];
+Geodesics = geodesics(X, Y, dx_htt, dy_htt, departureAngles);
+
+%% Plot
+% Plot domain boundary
+plotGeodesics(Geodesics, departureAngles)

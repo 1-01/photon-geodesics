@@ -8,7 +8,7 @@ function geodesic = geodesics(X, Y, dx_htt, dy_htt, photonTheta)
 geodesic = cell(size(photonTheta));
 
 % Specify ODE options
-options = odeset('RelTol', 1e-6, 'MaxStep', 0.001, 'Refine', 8, 'Events', @odevents);
+options = odeset('RelTol', 1e-6, 'MaxStep', 0.01, 'Refine', 8, 'Events', @odevents);
 
 % Plot the geodesics
 k = 1;
@@ -19,7 +19,7 @@ for theta = photonTheta
     v0 = [cosd(theta), sind(theta)];
     
     % Specify initial conditions
-    x_initial = [0, 0, 0.95, 0, 1, v0, 0]';
+    x_initial = [0, 0.2, 0.9, 0, 1, v0, 0]';
     
     % Solve the geodesic equation
     sol = ode45(@(l, u) odefun(l, u, X, Y, dx_htt, dy_htt), [0, 2], x_initial, options);
