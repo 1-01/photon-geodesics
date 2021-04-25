@@ -1,4 +1,5 @@
-function geodesic = geodesics(X, Y, dx_htt, dy_htt, photonTheta)
+function geodesic = geodesics(X, Y, dx_htt, dy_htt, ...
+                              photonTheta, photonOrigin)
 % 
 % Calculate geodesics from the perturbed Einstein equation (in 2 spatial
 % dimensions) in which the speed of light is 1.
@@ -19,7 +20,7 @@ for theta = photonTheta
     v0 = [cosd(theta), sind(theta)];
     
     % Specify initial conditions
-    x_initial = [0, 0.2, 0.9, 0, 1, v0, 0]';
+    x_initial = [0, photonOrigin, 0, 1, v0, 0]';
     
     % Solve the geodesic equation
     sol = ode45(@(l, u) odefun(l, u, X, Y, dx_htt, dy_htt), [0, 2], x_initial, options);

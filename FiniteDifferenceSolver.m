@@ -14,7 +14,7 @@ close all;
 clc;
 
 % Mesh resolution, set h = dx = dy
-h = 0.01;
+h = 0.005;
 
 % Boolean for plotting 2D mesh (not useful)
 plot2DMesh = false;
@@ -169,6 +169,7 @@ end
 
 % Plot gravitational potential Phi
 figure
+Phivis(X.^2 + Y.^2 > 1) = NaN;
 mesh(X, Y, Phivis', 'EdgeColor', 'interp')
 colormap copper
 title("Gravitational Potential from Central Finite Difference", 'interpreter', 'latex')
@@ -182,8 +183,9 @@ title(h, "$\Phi$", 'interpreter', 'latex')
 [dx_htt, dy_htt] = gradMetric(x, y, Phivis);
 
 % Calculate geodesics
+initialPosition = [0, 0.95];
 departureAngles = [262, 285];
-Geodesics = geodesics(X, Y, dx_htt, dy_htt, departureAngles);
+Geodesics = geodesics(X, Y, dx_htt, dy_htt, departureAngles, initialPosition);
 
 % Plot geodesics
 plotGeodesics(Geodesics, departureAngles)

@@ -53,8 +53,9 @@ dx_htt = -2*dPhidx;
 dy_htt = -2*dPhidy;
 
 %% Calculate geodesics 
+initialPosition = [0, 0.95];
 departureAngles = [262, 285];
-Geodesics = geodesics(X, Y, dx_htt, dy_htt, departureAngles);
+Geodesics = geodesics(X, Y, dx_htt, dy_htt, departureAngles, initialPosition);
 
 %% Plot
 plotGeodesics(Geodesics, departureAngles)
