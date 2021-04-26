@@ -8,11 +8,6 @@
 % April 16, 2021
 % 
 
-% Clearing workspace, closing windows, and clearing command window
-clear;
-close all;
-clc;
-
 % Mesh resolution, set h = dx = dy
 h = 0.005;
 
@@ -27,7 +22,7 @@ ymax = -1*ymin; % Symmetrical
 
 % Boundary conditions
 G = 1; % G attains unit value
-M = 7*pi/500; % Mass of perturbing body
+[~, M] = matterDensity(nan,nan); % Mass of perturbing body
 NewtPotential = @(x, y) -G.*M./(sqrt(x.^2+y.^2)); % For boundary and beyond unit disk
 
 % Mesh (h is given as input)

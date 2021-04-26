@@ -1,14 +1,11 @@
-function rho = matterDensity(x, y)
-% Location of the perturber
-x0 = 0;
-y0 = 0;
-rho = 7*exp(-((x - 2*x0).^2 + (y + y0/2).^2)*500);
-  
-  
-% p = 0.1;
-% deltaxy = rectangularPulse(x0-p,x0+p,x).*rectangularPulse(y0-p,y0+p,y);
+function [rho, M] = matterDensity(x, y)
 % 
-% % Calculate the mass density in SI units (kg/m3)
-% rho = perturberMatterDensity*deltaxy;
-% rho = 2*deltaxy;
-end
+% Define the matter density of an object at the origin as a Gaussian
+% distribution with "amplitude" a and extent s
+% 
+a = 4.6;
+s = 500;
+rho = a*exp(-(x.^2 + y.^2)*s);
+
+% Provide the exact form of the mass
+M = pi*a/s;

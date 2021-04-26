@@ -15,7 +15,7 @@ function I = boundaryIntegral(r, t, tPartitions)
 %             __  a
 %         M = || ---.
 %                 s
-M = pi*7/500;
+[~, M] = matterDensity(nan,nan);
 
 % Define the external partition width and begin at the absolute lower bound
 thetaWidth = 2*pi/tPartitions;

@@ -21,7 +21,7 @@ function f = odefun(l, u, X, Y, dx_htt, dy_htt)
     f = zeros(8, 1);
     f(1:4) = u(5:8);
     f(5) = dx_httval*dx1*dx2 + dy_httval*dx1*dx3;
-    f(6) = 0.5*dx_httval*dx1^2 + 0.5*dx_httval*dx2^2 + 0.5*dx_httval*dx3^2 + 0.5*dx_httval*dx4^2 + dy_httval*dx2*dx3;
-    f(7) = 0.5*dy_httval*dx1^2 + 0.5*dy_httval*dx2^2 + 0.5*dy_httval*dx3^2 + 0.5*dy_httval*dx4^2 + dx_httval*dx2*dx3;
-    f(8) = dx_httval*dx2*dx4 + dy_httval*dx3*dx4;
+    f(6) = 0.5*dx_httval*dx1^2 - 0.5*dx_httval*dx2^2 + 0.5*dx_httval*dx3^2 + 0.5*dx_httval*dx4^2 - dy_httval*dx2*dx3;
+    f(7) = 0.5*dy_httval*dx1^2 + 0.5*dy_httval*dx2^2 - 0.5*dy_httval*dx3^2 + 0.5*dy_httval*dx4^2 - dx_httval*dx2*dx3;
+    f(8) = -dx_httval*dx2*dx4 - dy_httval*dx3*dx4;
 end
