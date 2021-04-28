@@ -61,17 +61,18 @@ cartPhi = interp2(T, R, Phi, cartT, cartR);
 % Compute the gradient of the perturbing metric
 [dx_htt, dy_htt] = gradMetric(x, y, cartPhi);
 
-% Plot the interpolated solution obtained from using a Green's function
+% Plot the solution obtained from using a Green's function on the mesh
 figure
-mesh(X, Y, cartPhi, 'EdgeColor', 'interp')
+meshc(R.*cos(T), R.*sin(T), Phi)
+% mesh(X, Y, cartPhi, 'EdgeColor', 'interp') % Interpolated solution
 colormap copper
 title("Gravitational Potential from Green's Function", 'interpreter', 'latex')
-xlabel("$x$", 'interpreter', 'latex')
-ylabel("$y$", 'interpreter', 'latex')
+xlabel("$x^1$", 'interpreter', 'latex')
+ylabel("$x^2$", 'interpreter', 'latex')
 zlabel("Gravitational Potential $\Phi$", 'interpreter', 'latex')
 h = colorbar;
 title(h, "$\Phi$", 'interpreter', 'latex')
-
+view(315,15)%140,29
 
 % Calculate geodesics
 initialPosition = [0, 0.95];
