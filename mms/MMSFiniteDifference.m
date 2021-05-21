@@ -15,7 +15,7 @@ clc;
 format long
 
 % Mesh resolution, set h = dx = dy
-h = 0.01/2;
+h = 0.01;
 
 % Geometry & boundary conditions, must contain unit disk
 xmin = -1.1;
@@ -106,7 +106,7 @@ for k=1:N
    fprintf([reverseStr, msg]);
    reverseStr = repmat(sprintf('\b'), 1, length(msg));
 end
-% Solve AT = b for nodal temperature values
+% Solve AT = b for nodal potential values
 Phi = full(A\b);
 
 x = xmin:h:xmax;

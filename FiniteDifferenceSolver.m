@@ -9,13 +9,13 @@
 % 
 
 % Mesh resolution, set h = dx = dy
-h = 0.005;
+h = 0.025;
 
 % Boolean for plotting 2D mesh (not useful)
 plot2DMesh = false;
 
 % Geometry & boundary conditions, must contain unit disk
-xmin = -1.01;
+xmin = -1.015;
 xmax = -1*xmin; % Symmetrical
 ymin = xmin;
 ymax = -1*ymin; % Symmetrical
@@ -26,8 +26,8 @@ G = 1; % G attains unit value
 NewtPotential = @(x, y) -G.*M./(sqrt(x.^2+y.^2)); % For boundary and beyond unit disk
 
 % Mesh (h is given as input)
-nx = (xmax-xmin)/h - 1; % Number of "interior nodes" in x-direction
-ny = (ymax-ymin)/h - 1; % Number of "interior nodes" in y-direction
+nx = floor((xmax-xmin)/h - 1); % Number of "interior nodes" in x-direction
+ny = floor((ymax-ymin)/h - 1); % Number of "interior nodes" in y-direction
 N = nx*ny; % Total number of interior nodes
 
 % Allocate memory for A and b (sparse matrix & vector)
@@ -167,12 +167,19 @@ figure
 Phivis(X.^2 + Y.^2 > 1) = NaN;
 mesh(X, Y, Phivis', 'EdgeColor', 'interp')
 colormap copper
-title("Gravitational Potential from Central Finite Difference", 'interpreter', 'latex')
-xlabel("$x$", 'interpreter', 'latex')
-ylabel("$y$", 'interpreter', 'latex')
+title("Gravitational Potential from Finite Difference", 'interpreter', 'latex')
+xlabel("$x^1$", 'interpreter', 'latex')
+ylabel("$x^2$", 'interpreter', 'latex')
 zlabel("Gravitational Potential $\Phi$", 'interpreter', 'latex')
 h = colorbar;
 title(h, "$\Phi$", 'interpreter', 'latex')
+view(315,15)
+xticks(-1:0.5:1)
+yticks(-1:0.5:1)
+xlim([-1, 1])
+xlim([-1, 1])
+ylim([-1, 1])
+zticks(-0.25:0.05:-0.05)
 
 % Compute the gradient of the perturbing metric
 [dx_htt, dy_htt] = gradMetric(x, y, Phivis);
